@@ -7,7 +7,8 @@ def calculate_optical_flow(video_path):
     prev_gray = cv2.cvtColor(first_frame, cv2.COLOR_BGR2GRAY)
     mask = np.zeros_like(first_frame)
     mask[..., 1] = 255
-
+    fx = (24 * 1920) / 4000
+    distance_to_ground = 100
     # Parameters for Lucas-Kanade method
     lk_params = dict(winSize=(15, 15),
                      maxLevel=2,
@@ -18,7 +19,8 @@ def calculate_optical_flow(video_path):
 
     # Initialize accumulated translation
     accumulated_translation = np.zeros(2)
-
+    
+    
     while(cap.isOpened()):
         ret, frame = cap.read()
         if ret:
@@ -40,6 +42,7 @@ def calculate_optical_flow(video_path):
                 translation = np.mean(good_new - good_old, axis=0)
                 print("Estimated translation:", translation)
                 # fx = (fmm * img_w)/ sensor_W
+                
                 # translation_in_meters = translation * distance_to_ground / fx
                 # Accumulate translation
                 accumulated_translation += translation
