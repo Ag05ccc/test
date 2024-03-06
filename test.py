@@ -43,9 +43,10 @@ def calculate_optical_flow(video_path):
                 print("Estimated translation:", translation)
                 # fx = (fmm * img_w)/ sensor_W
                 
-                # translation_in_meters = translation * distance_to_ground / fx
+                translation_in_meters = translation * distance_to_ground / fx
                 # Accumulate translation
-                accumulated_translation += translation
+                accumulated_translation += translation_in_meters
+                # accumulated_translation += translation
 
                 print("Accumulated translation:", accumulated_translation)
 
