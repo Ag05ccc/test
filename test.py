@@ -39,6 +39,7 @@ def calculate_optical_flow(video_path):
             if len(good_old) > 0 and len(good_new) > 0:
                 translation = np.mean(good_new - good_old, axis=0)
                 print("Estimated translation:", translation)
+                # fx = (fmm * img_w)/ sensor_W
                 # translation_in_meters = translation * distance_to_ground / fx
                 # Accumulate translation
                 accumulated_translation += translation
